@@ -3,12 +3,20 @@ import { Link } from "react-router-dom";
 import EmptyCart from "../assets/empty_cart.svg";
 
 const Cart = ({ cart, changeQuantity, removeItem }) => {
-    const total = () => {
+    const subtotal = () => {
         let price = 0;
         cart.forEach((item) => {
             price += ((item.salePrice || item.originalPrice) * item.quantity);
         });
         return price;
+    };
+
+    const tax = () => {
+        return (subtotal() * 0.0825);
+    };
+
+    const total = () => {
+        return (subtotal()) + (tax());
     };
 
     return (
@@ -47,7 +55,7 @@ const Cart = ({ cart, changeQuantity, removeItem }) => {
                                     );
                                 })}
                             </div>
-                            {cart.lenght === 0 && (
+                            {cart.length === 0 && (
                                 <div className="cart__empty">
                                     <img src={EmptyCart} alt="" className="cart__empty--img" />
                                     <h2>You don't have any books in your cart!</h2>
@@ -61,15 +69,15 @@ const Cart = ({ cart, changeQuantity, removeItem }) => {
                             <div className="total">
                                 <div className="total__item total__sub-total">
                                     <span>Subtotal</span>
-                                    <span>${(total() * 0.9).toFixed(2)}</span>
+                                    <span>${(subtotal()).toFixed(2)}</span>
                                 </div>
                                 <div className="total__item total__tax">
                                     <span>Tax</span>
-                                    <span>${(total() * 0.1).toFixed(2)}</span>
+                                    <span>${(tax()).toFixed(2)}</span>
                                 </div>
                                 <div className="total__item total__price">
                                     <span>Total</span>
-                                    <span>${total().toFixed(2)}</span>
+                                    <span>${(total()).toFixed(2)}</span>
                                 </div>
                                 <button className="btn btn__checkout no-cursor" onClick={() => alert(`No checkout service available`)}>
                                     Proceed to checkout
