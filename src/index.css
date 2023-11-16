@@ -178,7 +178,6 @@ button:active {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* visibility: hidden; */
   display: none;
   transition: all 300ms ease;
   opacity: 0;
@@ -191,7 +190,6 @@ button:active {
 }
 
 .menu--open .menu__backdrop {
-  /* visibility: visible; */
   display: block;
   opacity: 1;
   transform: translate(0);
