@@ -5,6 +5,7 @@ import Rating from "./Rating";
 
 const Book = ({ book }) => {
     const [img, setImg] = useState();
+    // const mountedRef = useRef(true);
 
     useEffect(() => {
         const image = new Image();
@@ -12,8 +13,11 @@ const Book = ({ book }) => {
         image.onload = () => {
             setTimeout(() => {
               setImg(image);
-            }, 400);
+            }, 300);
         };
+        // return () => {
+        //     mountedRef.current = false;
+        // }
     });
 
     return(
